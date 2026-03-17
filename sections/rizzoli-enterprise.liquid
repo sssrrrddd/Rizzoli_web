@@ -1,0 +1,170 @@
+{{ 'rizzoli-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .rz-enterprise {
+    padding: 100px 40px;
+    background: var(--rz-black);
+    color: var(--rz-white);
+  }
+
+  .rz-enterprise__container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .rz-enterprise__eyebrow {
+    font-family: var(--rz-font-heading);
+    font-size: var(--rz-text-overline);
+    font-weight: var(--rz-fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--rz-red);
+    margin-bottom: 20px;
+  }
+
+  .rz-enterprise__title {
+    font-family: var(--rz-font-heading);
+    font-size: clamp(32px, 4vw, var(--rz-text-h2));
+    font-weight: var(--rz-fw-black);
+    margin-bottom: 20px;
+  }
+
+  .rz-enterprise__text {
+    font-family: var(--rz-font-body);
+    font-size: var(--rz-text-body-lg);
+    line-height: 1.7;
+    color: #ccc;
+    margin-bottom: 30px;
+  }
+
+  .rz-enterprise__features {
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto 40px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .rz-enterprise__features li {
+    padding: 8px 0 8px 20px;
+    position: relative;
+    color: #ddd;
+    font-family: var(--rz-font-body);
+    font-size: var(--rz-text-body-sm);
+  }
+
+  .rz-enterprise__features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--rz-red);
+    border-radius: 50%;
+  }
+
+  @media (max-width: 768px) {
+    .rz-enterprise {
+      padding: 60px 20px;
+    }
+  }
+</style>
+
+<section class="rz-enterprise" data-section-id="{{ section.id }}">
+  <div class="rz-enterprise__container rz-fade-in">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="rz-enterprise__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.title != blank -%}
+      <h2 class="rz-enterprise__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <p class="rz-enterprise__text">{{ section.settings.text }}</p>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="rz-enterprise__features">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>{{ block.settings.feature_text }}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if section.settings.button_text != blank -%}
+      <a href="{{ section.settings.button_link }}" class="rz-btn--enterprise">
+        {{ section.settings.button_text }}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RIZZOLI Empresas",
+  "tag": "section",
+  "class": "rz-enterprise-section",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Etiqueta superior",
+      "default": "Para Empresas"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Soluciones Para Tu Equipo"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texto descriptivo",
+      "default": "Equipamos a tu equipo de operadores técnicos con calzado certificado que van a querer usar. Precios por volumen, facturación empresa, stock garantizado y atención dedicada."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texto del botón",
+      "default": "SOLICITAR COTIZACIÓN"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link del botón"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Característica",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_text",
+          "label": "Texto",
+          "default": "Certificaciones NCh 699 e ISP"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RIZZOLI Empresas",
+      "blocks": [
+        { "type": "feature", "settings": { "feature_text": "Certificaciones NCh 699 e ISP" } },
+        { "type": "feature", "settings": { "feature_text": "Precios especiales por volumen" } },
+        { "type": "feature", "settings": { "feature_text": "Catálogo completo de tallas hombre y mujer" } },
+        { "type": "feature", "settings": { "feature_text": "Facturación y orden de compra" } },
+        { "type": "feature", "settings": { "feature_text": "Despacho a faena en todo Chile" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

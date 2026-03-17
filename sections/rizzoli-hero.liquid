@@ -1,0 +1,175 @@
+{{ 'rizzoli-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .rz-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rz-hero__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .rz-hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+    z-index: 1;
+  }
+
+  .rz-hero__content {
+    position: relative;
+    z-index: 2;
+    text-align: right;
+    padding: 240px 60px 0 0;
+    max-width: var(--rz-max-width);
+    margin: 0 0 0 auto;
+    width: 100%;
+  }
+
+  .rz-hero__title {
+    font-family: var(--rz-font-heading);
+    font-size: clamp(40px, 6vw, var(--rz-text-h1));
+    font-weight: var(--rz-fw-black);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    color: var(--rz-white);
+  }
+
+  .rz-hero__subtitle {
+    font-family: var(--rz-font-body);
+    font-size: var(--rz-text-h4);
+    font-weight: var(--rz-fw-regular);
+    color: var(--rz-gray);
+    max-width: 600px;
+    line-height: 1.3;
+    margin-left: auto;
+  }
+
+  .rz-hero__cta {
+    margin-top: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .rz-hero {
+      min-height: 70vh;
+    }
+
+    .rz-hero__content {
+      padding: 160px 20px 0 20px;
+      text-align: left;
+    }
+
+    .rz-hero__subtitle {
+      margin-left: 0;
+    }
+
+    .rz-hero__title {
+      font-size: 36px;
+    }
+  }
+</style>
+
+<section class="rz-hero" data-section-id="{{ section.id }}">
+  {%- if section.settings.image != blank -%}
+    <img
+      src="{{ section.settings.image | image_url: width: 1920 }}"
+      alt="{{ section.settings.image.alt | escape }}"
+      class="rz-hero__bg"
+      loading="eager"
+      fetchpriority="high"
+      width="1920"
+      height="1080"
+    >
+  {%- else -%}
+    {{ 'lifestyle-1' | placeholder_svg_tag: 'rz-hero__bg' }}
+  {%- endif -%}
+
+  <div class="rz-hero__overlay"></div>
+
+  <div class="rz-hero__content">
+    {%- if section.settings.title != blank -%}
+      <h1 class="rz-hero__title">{{ section.settings.title }}</h1>
+    {%- endif -%}
+
+    {%- if section.settings.subtitle != blank -%}
+      <p class="rz-hero__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.button_text != blank -%}
+      <div class="rz-hero__cta">
+        <a href="{{ section.settings.button_link }}" class="rz-btn--hero">
+          {{ section.settings.button_text }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RIZZOLI Hero",
+  "tag": "section",
+  "class": "rz-hero-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen de fondo",
+      "info": "Recomendado: 1920x1080px o más grande"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Oscuridad del overlay",
+      "default": 35
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título principal",
+      "default": "THE SAFETY WAY."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Diseñados para quienes enfrentan lo que otros solo imaginan, desde 1963."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texto del botón",
+      "default": "EXPLORAR COLECCIÓN"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link del botón"
+    }
+  ],
+  "presets": [
+    {
+      "name": "RIZZOLI Hero"
+    }
+  ]
+}
+{% endschema %}

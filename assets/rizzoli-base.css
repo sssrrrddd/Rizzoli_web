@@ -1,0 +1,412 @@
+/* ============================================================
+   RIZZOLI — Design System v2 (Shopify Theme)
+   Darker Grotesque + DM Sans | Pantone-matched palette
+   ============================================================ */
+
+/* ===== DESIGN TOKENS ===== */
+:root {
+  /* Colors — Pantone matched */
+  --rz-black: #000000;       /* Pantone Black C */
+  --rz-red: #C21518;         /* Pantone 485 C */
+  --rz-red-dark: #a01114;
+  --rz-gray: #B5B5B5;        /* Pantone 4274 */
+  --rz-gray-light: #F5F5F5;
+  --rz-white: #FFFFFF;
+
+  /* Typography */
+  --rz-font-heading: 'Darker Grotesque', 'Helvetica Neue', Arial, sans-serif;
+  --rz-font-body: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Font weights */
+  --rz-fw-regular: 400;
+  --rz-fw-medium: 500;
+  --rz-fw-semibold: 600;
+  --rz-fw-bold: 700;
+  --rz-fw-black: 900;
+
+  /* Type scale */
+  --rz-text-h1: 72px;
+  --rz-text-h2: 48px;
+  --rz-text-h3: 32px;
+  --rz-text-h4: 24px;
+  --rz-text-h5: 18px;
+  --rz-text-body-lg: 16px;
+  --rz-text-body-sm: 14px;
+  --rz-text-caption: 12px;
+  --rz-text-overline: 11px;
+  --rz-text-button: 12px;
+
+  /* Layout */
+  --rz-header-height: 100px;
+  --rz-max-width: 1400px;
+  --rz-transition: 0.3s ease;
+}
+
+/* ===== GLOBAL TYPOGRAPHY ===== */
+.rz-h1 {
+  font-family: var(--rz-font-heading);
+  font-size: var(--rz-text-h1);
+  font-weight: var(--rz-fw-black);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.rz-h2 {
+  font-family: var(--rz-font-heading);
+  font-size: var(--rz-text-h2);
+  font-weight: var(--rz-fw-bold);
+  line-height: 1.1;
+}
+
+.rz-h3 {
+  font-family: var(--rz-font-heading);
+  font-size: var(--rz-text-h3);
+  font-weight: var(--rz-fw-bold);
+  line-height: 1.2;
+}
+
+.rz-h4 {
+  font-family: var(--rz-font-heading);
+  font-size: var(--rz-text-h4);
+  font-weight: var(--rz-fw-semibold);
+  line-height: 1.3;
+}
+
+.rz-h5 {
+  font-family: var(--rz-font-heading);
+  font-size: var(--rz-text-h5);
+  font-weight: var(--rz-fw-semibold);
+  line-height: 1.4;
+}
+
+.rz-body-lg {
+  font-family: var(--rz-font-body);
+  font-size: var(--rz-text-body-lg);
+  font-weight: var(--rz-fw-regular);
+  line-height: 1.6;
+}
+
+.rz-body-sm {
+  font-family: var(--rz-font-body);
+  font-size: var(--rz-text-body-sm);
+  font-weight: var(--rz-fw-regular);
+  line-height: 1.6;
+}
+
+.rz-caption {
+  font-family: var(--rz-font-body);
+  font-size: var(--rz-text-caption);
+  font-weight: var(--rz-fw-medium);
+}
+
+.rz-overline {
+  font-family: var(--rz-font-body);
+  font-size: var(--rz-text-overline);
+  font-weight: var(--rz-fw-bold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ===== BUTTONS ===== */
+
+/* CTA Button — "EXPLORA COLECCIÓN →" */
+.rz-btn--cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--rz-font-heading);
+  font-size: var(--rz-text-button);
+  font-weight: var(--rz-fw-black);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 24px;
+  border: 1.5px solid var(--rz-black);
+  background: transparent;
+  color: var(--rz-black);
+  cursor: pointer;
+  transition: all var(--rz-transition);
+  text-decoration: none;
+}
+
+.rz-btn--cta:hover {
+  background: var(--rz-black);
+  color: var(--rz-white);
+}
+
+.rz-btn--cta svg,
+.rz-btn--cta .rz-btn__arrow {
+  transition: transform var(--rz-transition);
+}
+
+.rz-btn--cta:hover svg,
+.rz-btn--cta:hover .rz-btn__arrow {
+  transform: translateX(4px);
+}
+
+/* Small Button — "COMPRAR" */
+.rz-btn--small {
+  display: inline-block;
+  font-family: var(--rz-font-heading);
+  font-size: var(--rz-text-button);
+  font-weight: var(--rz-fw-black);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  border: 1.5px solid var(--rz-black);
+  background: transparent;
+  color: var(--rz-black);
+  cursor: pointer;
+  transition: all var(--rz-transition);
+  text-decoration: none;
+}
+
+.rz-btn--small:hover {
+  background: var(--rz-black);
+  color: var(--rz-white);
+}
+
+/* Enterprise Button (dark bg) */
+.rz-btn--enterprise {
+  display: inline-block;
+  font-family: var(--rz-font-heading);
+  font-size: var(--rz-text-button);
+  font-weight: var(--rz-fw-black);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  border: 1.5px solid var(--rz-white);
+  background: transparent;
+  color: var(--rz-white);
+  cursor: pointer;
+  transition: all var(--rz-transition);
+  text-decoration: none;
+}
+
+.rz-btn--enterprise:hover {
+  background: var(--rz-red);
+  border-color: var(--rz-red);
+  color: var(--rz-white);
+}
+
+/* Hero Button — white bg */
+.rz-btn--hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 40px;
+  font-family: var(--rz-font-heading);
+  font-size: var(--rz-text-button);
+  font-weight: var(--rz-fw-black);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 24px;
+  border: none;
+  background: var(--rz-white);
+  color: var(--rz-black);
+  cursor: pointer;
+  transition: all var(--rz-transition);
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+.rz-btn--hero:hover {
+  background: var(--rz-black);
+  color: var(--rz-white);
+}
+
+.rz-btn--hero svg {
+  transition: transform var(--rz-transition);
+}
+
+.rz-btn--hero:hover svg {
+  transform: translateX(4px);
+}
+
+/* Featured Button */
+.rz-btn--featured {
+  display: inline-block;
+  font-family: var(--rz-font-heading);
+  font-size: var(--rz-text-button);
+  font-weight: var(--rz-fw-black);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  border: 0.5px solid var(--rz-gray);
+  background: var(--rz-white);
+  color: var(--rz-black);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--rz-transition);
+  text-decoration: none;
+}
+
+.rz-btn--featured:hover {
+  background: var(--rz-black);
+  border-color: var(--rz-black);
+  color: var(--rz-white);
+}
+
+/* ===== PRODUCT CARD ===== */
+.rz-product-card {
+  cursor: pointer;
+}
+
+.rz-product-card__img-wrapper {
+  position: relative;
+  background: var(--rz-gray-light);
+  overflow: hidden;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin-bottom: 12px;
+}
+
+.rz-product-card__img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.rz-product-card:hover .rz-product-card__img-wrapper img {
+  transform: scale(1.08);
+}
+
+.rz-product-card__badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-family: var(--rz-font-heading);
+  font-size: var(--rz-text-overline);
+  font-weight: var(--rz-fw-bold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: var(--rz-red);
+  color: var(--rz-white);
+  padding: 3px 10px;
+}
+
+.rz-product-card__name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.rz-product-card__name {
+  font-family: var(--rz-font-heading);
+  font-size: var(--rz-text-h5);
+  font-weight: var(--rz-fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.rz-product-card__color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rz-red);
+  background: transparent;
+  transition: background var(--rz-transition);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.rz-product-card:hover .rz-product-card__color-dot,
+.rz-product-card__color-dot:hover {
+  background: var(--rz-red);
+}
+
+.rz-product-card__buy {
+  font-family: var(--rz-font-heading);
+  font-size: var(--rz-text-button);
+  font-weight: var(--rz-fw-black);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--rz-black);
+  transition: color var(--rz-transition);
+  text-decoration: none;
+}
+
+.rz-product-card__buy:hover {
+  color: var(--rz-red);
+}
+
+.rz-product-card__desc {
+  font-family: var(--rz-font-body);
+  font-size: var(--rz-text-body-sm);
+  font-weight: var(--rz-fw-regular);
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.rz-product-card__price {
+  font-family: var(--rz-font-heading);
+  font-size: var(--rz-text-h5);
+  font-weight: var(--rz-fw-semibold);
+}
+
+/* ===== EYEBROW / OVERLINE ===== */
+.rz-eyebrow {
+  font-family: var(--rz-font-heading);
+  font-size: var(--rz-text-overline);
+  font-weight: var(--rz-fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--rz-red);
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.rz-fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.rz-fade-in.rz-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== SECTION CONTAINER ===== */
+.rz-section {
+  padding: 80px 40px;
+}
+
+.rz-container {
+  max-width: var(--rz-max-width);
+  margin: 0 auto;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  :root {
+    --rz-text-h1: 40px;
+    --rz-text-h2: 32px;
+    --rz-text-h3: 24px;
+    --rz-text-h4: 20px;
+  }
+
+  .rz-section {
+    padding: 60px 20px;
+  }
+
+  .rz-btn--cta,
+  .rz-btn--small,
+  .rz-btn--enterprise {
+    padding: 12px 20px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --rz-text-h1: 32px;
+    --rz-text-h2: 28px;
+  }
+
+  .rz-section {
+    padding: 50px 16px;
+  }
+}

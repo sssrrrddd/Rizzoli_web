@@ -1,0 +1,207 @@
+{{ 'rizzoli-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .rz-newsletter {
+    padding: 80px 40px;
+    background: var(--rz-white);
+    border-top: 1px solid #eee;
+  }
+
+  .rz-newsletter__container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .rz-newsletter__eyebrow {
+    font-family: var(--rz-font-heading);
+    font-size: var(--rz-text-overline);
+    font-weight: var(--rz-fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--rz-red);
+    margin-bottom: 16px;
+  }
+
+  .rz-newsletter__title {
+    font-family: var(--rz-font-heading);
+    font-size: var(--rz-text-h2);
+    font-weight: var(--rz-fw-black);
+    margin-bottom: 12px;
+  }
+
+  .rz-newsletter__text {
+    font-family: var(--rz-font-body);
+    font-size: var(--rz-text-body-lg);
+    color: #555;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .rz-newsletter__form {
+    display: flex;
+    gap: 0;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .rz-newsletter__input {
+    flex: 1;
+    font-family: var(--rz-font-body);
+    font-size: var(--rz-text-body-sm);
+    padding: 14px 20px;
+    border: 1.5px solid var(--rz-black);
+    border-right: none;
+    background: var(--rz-white);
+    color: var(--rz-black);
+    outline: none;
+    transition: border-color var(--rz-transition);
+  }
+
+  .rz-newsletter__input::placeholder {
+    color: var(--rz-gray);
+  }
+
+  .rz-newsletter__input:focus {
+    border-color: var(--rz-red);
+  }
+
+  .rz-newsletter__submit {
+    font-family: var(--rz-font-heading);
+    font-size: var(--rz-text-button);
+    font-weight: var(--rz-fw-black);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 24px;
+    background: var(--rz-black);
+    color: var(--rz-white);
+    border: 1.5px solid var(--rz-black);
+    cursor: pointer;
+    transition: all var(--rz-transition);
+    white-space: nowrap;
+  }
+
+  .rz-newsletter__submit:hover {
+    background: var(--rz-red);
+    border-color: var(--rz-red);
+  }
+
+  .rz-newsletter__success {
+    display: none;
+    font-family: var(--rz-font-body);
+    font-size: var(--rz-text-body-sm);
+    color: var(--rz-red);
+    margin-top: 12px;
+  }
+
+  @media (max-width: 768px) {
+    .rz-newsletter {
+      padding: 60px 20px;
+    }
+
+    .rz-newsletter__form {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rz-newsletter__input {
+      border-right: 1.5px solid var(--rz-black);
+    }
+
+    .rz-newsletter__submit {
+      width: 100%;
+    }
+  }
+</style>
+
+<section class="rz-newsletter" data-section-id="{{ section.id }}">
+  <div class="rz-newsletter__container rz-fade-in">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="rz-newsletter__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.title != blank -%}
+      <h2 class="rz-newsletter__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <p class="rz-newsletter__text">{{ section.settings.text }}</p>
+    {%- endif -%}
+
+    {%- form 'customer', id: 'rz-newsletter-form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+
+      <div class="rz-newsletter__form">
+        <input
+          type="email"
+          name="contact[email]"
+          class="rz-newsletter__input"
+          placeholder="{{ section.settings.placeholder }}"
+          required
+          autocomplete="email"
+          aria-label="Email"
+        >
+        <button type="submit" class="rz-newsletter__submit">
+          {{ section.settings.button_text }}
+        </button>
+      </div>
+
+      {%- if form.posted_successfully? -%}
+        <p class="rz-newsletter__success" style="display: block;">
+          {{ section.settings.success_message }}
+        </p>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RIZZOLI Newsletter",
+  "tag": "section",
+  "class": "rz-newsletter-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Etiqueta superior",
+      "default": "Comunidad"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Únete a la comunidad RIZZOLI"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texto descriptivo",
+      "default": "Recibe novedades, lanzamientos exclusivos y contenido técnico directo en tu correo."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Placeholder del email",
+      "default": "Tu correo electrónico"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texto del botón",
+      "default": "SUSCRIBIRSE"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Mensaje de éxito",
+      "default": "¡Gracias! Te has suscrito exitosamente."
+    }
+  ],
+  "presets": [
+    {
+      "name": "RIZZOLI Newsletter"
+    }
+  ]
+}
+{% endschema %}

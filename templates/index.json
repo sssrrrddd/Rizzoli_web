@@ -1,210 +1,266 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "rz_hero": {
+      "type": "rizzoli-hero",
+      "settings": {
+        "title": "THE SAFETY WAY.",
+        "subtitle": "Diseñados para quienes enfrentan lo que otros solo imaginan, desde 1963.",
+        "button_text": "EXPLORAR COLECCIÓN",
+        "overlay_opacity": 35
+      }
+    },
+    "rz_categories": {
+      "type": "rizzoli-categories",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "cat_hombre": {
+          "type": "category",
           "settings": {
-            "heading": "Image banner",
-            "heading_size": "h0"
+            "title": "Hombre"
           }
         },
-        "text": {
-          "type": "text",
+        "cat_mujer": {
+          "type": "category",
           "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
+            "title": "Mujer"
           }
         },
-        "button": {
-          "type": "buttons",
+        "cat_accesorios": {
+          "type": "category",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "title": "Accesorios"
           }
         }
       },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
+      "block_order": ["cat_hombre", "cat_mujer", "cat_accesorios"],
+      "settings": {}
+    },
+    "rz_featured_urban": {
+      "type": "rizzoli-featured-product",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "product_name": "Urban 70",
+        "description": "Diseño clásico italochileno",
+        "badge_text": "NUEVO",
+        "show_price": true,
+        "price_text": "$54.990",
+        "button_text": "COMPRAR",
+        "reverse_layout": false
       }
     },
-    "rich_text": {
-      "type": "rich-text",
+    "rz_grid_terra": {
+      "type": "rizzoli-product-grid",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "terra_1": {
+          "type": "manual_product",
           "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
+            "name": "RZ-1",
+            "description": "Resistencia certificada para cada misión",
+            "price": "$49.990",
+            "show_badge": true,
+            "badge_text": "NUEVO"
           }
         },
-        "text": {
-          "type": "text",
+        "terra_2": {
+          "type": "manual_product",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
+            "name": "Urban 70",
+            "description": "Diseño clásico italochileno",
+            "price": "$54.990",
+            "show_badge": true,
+            "badge_text": "NUEVO"
+          }
+        },
+        "terra_3": {
+          "type": "manual_product",
+          "settings": {
+            "name": "Titanium",
+            "description": "Resistencia de alto impacto",
+            "price": "$54.990",
+            "show_badge": true,
+            "badge_text": "NUEVO"
+          }
+        },
+        "terra_4": {
+          "type": "manual_product",
+          "settings": {
+            "name": "RZ Mujer",
+            "description": "Ergonomía certificada, estilo propio",
+            "price": "$49.990",
+            "show_badge": true,
+            "badge_text": "NUEVO"
           }
         }
       },
-      "block_order": [
-        "heading",
-        "text"
-      ],
+      "block_order": ["terra_1", "terra_2", "terra_3", "terra_4"],
       "settings": {
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 0
+        "heading": "Explora línea Terra",
+        "show_badges": true,
+        "badge_text": "NUEVO",
+        "products_limit": 4
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "rz_featured_raptor": {
+      "type": "rizzoli-featured-product",
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "show_view_all": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "columns_mobile": "2",
-        "padding_top": 28,
-        "padding_bottom": 36
+        "product_name": "RAPTOR",
+        "description": "Protección extrema, diseño sin límites",
+        "badge_text": "NUEVO",
+        "show_price": true,
+        "price_text": "$54.990",
+        "button_text": "COMPRAR",
+        "reverse_layout": true
       }
     },
-    "collage": {
-      "type": "collage",
+    "rz_grid_grip": {
+      "type": "rizzoli-product-grid",
       "blocks": {
-        "collection-0": {
-          "type": "collection",
+        "grip_1": {
+          "type": "manual_product",
           "settings": {
-            "collection": ""
+            "name": "Raptor",
+            "description": "Protección extrema, diseño sin límites",
+            "price": "$54.990",
+            "show_badge": false,
+            "badge_text": ""
           }
         },
-        "product": {
-          "type": "product",
+        "grip_2": {
+          "type": "manual_product",
           "settings": {
-            "product": "",
-            "second_image": false
+            "name": "Antartic",
+            "description": "Resistencia al frío extremo",
+            "price": "$59.990",
+            "show_badge": false,
+            "badge_text": ""
           }
         },
-        "collection-1": {
-          "type": "collection",
+        "grip_3": {
+          "type": "manual_product",
           "settings": {
-            "collection": ""
+            "name": "Agility",
+            "description": "Ligereza y protección combinadas",
+            "price": "$49.990",
+            "show_badge": false,
+            "badge_text": ""
+          }
+        },
+        "grip_4": {
+          "type": "manual_product",
+          "settings": {
+            "name": "Bronce",
+            "description": "Clásico de alto rendimiento",
+            "price": "$44.990",
+            "show_badge": false,
+            "badge_text": ""
           }
         }
       },
-      "block_order": [
-        "collection-0",
-        "product",
-        "collection-1"
-      ],
+      "block_order": ["grip_1", "grip_2", "grip_3", "grip_4"],
       "settings": {
-        "heading": "Multimedia collage",
-        "heading_size": "h2",
-        "desktop_layout": "left",
-        "mobile_layout": "collage",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "heading": "Un Grip Más Moderno",
+        "show_badges": false,
+        "badge_text": "",
+        "products_limit": 4
       }
     },
-    "video": {
-      "type": "video",
-      "settings": {
-        "heading": "",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "heading_size": "h1",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
+    "rz_tech": {
+      "type": "rizzoli-tech-hotspots",
       "blocks": {
-        "column1": {
-          "type": "column",
+        "tech_1": {
+          "type": "hotspot",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "name": "Punta Composite",
+            "description": "Protección de impacto con material composite ultraligero, visualmente imperceptible.",
+            "position_x": 20,
+            "position_y": 45
           }
         },
-        "column2": {
-          "type": "column",
+        "tech_2": {
+          "type": "hotspot",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "name": "Suela Antideslizante",
+            "description": "Tecnología SRC de máxima adherencia en superficies húmedas y aceitosas.",
+            "position_x": 50,
+            "position_y": 88
           }
         },
-        "column3": {
-          "type": "column",
+        "tech_3": {
+          "type": "hotspot",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "name": "Membrana Impermeable",
+            "description": "Barrera transpirable que mantiene el pie seco en condiciones extremas.",
+            "position_x": 65,
+            "position_y": 35
+          }
+        },
+        "tech_4": {
+          "type": "hotspot",
+          "settings": {
+            "name": "Plantilla Ergonómica",
+            "description": "Soporte anatómico certificado para jornadas de 12+ horas de uso continuo.",
+            "position_x": 40,
+            "position_y": 70
           }
         }
       },
-      "block_order": [
-        "column1",
-        "column2",
-        "column3"
-      ],
+      "block_order": ["tech_1", "tech_2", "tech_3", "tech_4"],
       "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "swipe_on_mobile": false,
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "title": "Tecnología que protege",
+        "subtitle": "Ingeniería de protección en cada detalle"
+      }
+    },
+    "rz_newsletter": {
+      "type": "rizzoli-newsletter",
+      "settings": {
+        "eyebrow": "Comunidad",
+        "title": "Únete a la comunidad RIZZOLI",
+        "text": "Recibe novedades, lanzamientos exclusivos y contenido técnico directo en tu correo.",
+        "placeholder": "Tu correo electrónico",
+        "button_text": "SUSCRIBIRSE",
+        "success_message": "¡Gracias! Te has suscrito exitosamente."
+      }
+    },
+    "rz_enterprise": {
+      "type": "rizzoli-enterprise",
+      "blocks": {
+        "feat_1": {
+          "type": "feature",
+          "settings": { "feature_text": "Certificaciones NCh 699 e ISP" }
+        },
+        "feat_2": {
+          "type": "feature",
+          "settings": { "feature_text": "Precios especiales por volumen" }
+        },
+        "feat_3": {
+          "type": "feature",
+          "settings": { "feature_text": "Catálogo completo de tallas hombre y mujer" }
+        },
+        "feat_4": {
+          "type": "feature",
+          "settings": { "feature_text": "Facturación y orden de compra" }
+        },
+        "feat_5": {
+          "type": "feature",
+          "settings": { "feature_text": "Despacho a faena en todo Chile" }
+        }
+      },
+      "block_order": ["feat_1", "feat_2", "feat_3", "feat_4", "feat_5"],
+      "settings": {
+        "eyebrow": "Para Empresas",
+        "title": "Soluciones Para Tu Equipo",
+        "text": "Equipamos a tu equipo de operadores técnicos con calzado certificado que van a querer usar. Precios por volumen, facturación empresa, stock garantizado y atención dedicada.",
+        "button_text": "SOLICITAR COTIZACIÓN"
       }
     }
   },
   "order": [
-    "image_banner",
-    "rich_text",
-    "featured_collection",
-    "collage",
-    "video",
-    "multicolumn"
+    "rz_hero",
+    "rz_categories",
+    "rz_featured_urban",
+    "rz_grid_terra",
+    "rz_featured_raptor",
+    "rz_grid_grip",
+    "rz_tech",
+    "rz_newsletter",
+    "rz_enterprise"
   ]
 }

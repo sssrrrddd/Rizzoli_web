@@ -1,0 +1,263 @@
+{{ 'rizzoli-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .rz-products {
+    padding: 80px 0;
+  }
+
+  .rz-products__container {
+    max-width: var(--rz-max-width);
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .rz-products__heading {
+    font-family: var(--rz-font-heading);
+    font-size: var(--rz-text-h2);
+    font-weight: var(--rz-fw-bold);
+    margin-bottom: 40px;
+  }
+
+  .rz-products__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
+
+  .rz-product-card__link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  /* Manual card styles (when no Shopify products loaded) */
+  .rz-products__manual-card {
+    cursor: pointer;
+  }
+
+  .rz-products__manual-img {
+    position: relative;
+    background: var(--rz-gray-light);
+    overflow: hidden;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+
+  .rz-products__manual-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+  }
+
+  .rz-products__manual-card:hover .rz-products__manual-img img {
+    transform: scale(1.08);
+  }
+
+  @media (max-width: 1024px) {
+    .rz-products__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .rz-products {
+      padding: 60px 0;
+    }
+
+    .rz-products__container {
+      padding: 0 20px;
+      overflow: hidden;
+    }
+
+    .rz-products__grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+      padding-bottom: 16px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .rz-products__grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .rz-products__grid > * {
+      min-width: 220px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .rz-products__grid > * {
+      min-width: 180px;
+    }
+  }
+</style>
+
+<section class="rz-products" data-section-id="{{ section.id }}">
+  <div class="rz-products__container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="rz-products__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="rz-products__grid">
+      {%- if section.settings.collection != blank -%}
+        {%- for product in section.settings.collection.products limit: section.settings.products_limit -%}
+          {%- render 'rizzoli-product-card',
+            product: product,
+            show_badge: section.settings.show_badges,
+            badge_text: section.settings.badge_text
+          -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          <div class="rz-products__manual-card rz-product-card rz-fade-in" {{ block.shopify_attributes }}>
+            <div class="rz-products__manual-img rz-product-card__img-wrapper">
+              {%- if block.settings.show_badge -%}
+                <span class="rz-product-card__badge">{{ block.settings.badge_text }}</span>
+              {%- endif -%}
+
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 600 }}"
+                  alt="{{ block.settings.name | escape }}"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                >
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag }}
+              {%- endif -%}
+            </div>
+
+            <div class="rz-product-card__name-row">
+              <h3 class="rz-product-card__name">{{ block.settings.name }}</h3>
+              <div class="rz-product-card__color-dot" aria-label="Color disponible"></div>
+            </div>
+
+            {%- if block.settings.description != blank -%}
+              <p class="rz-product-card__desc">{{ block.settings.description }}</p>
+            {%- endif -%}
+
+            {%- if block.settings.price != blank -%}
+              <p class="rz-product-card__price">{{ block.settings.price }}</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RIZZOLI Grid Productos",
+  "tag": "section",
+  "class": "rz-products-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título de la sección",
+      "default": "Explora línea Terra"
+    },
+    {
+      "type": "header",
+      "content": "Colección de Shopify (automático)"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colección",
+      "info": "Selecciona una colección para mostrar productos automáticamente. Si no seleccionas, usa los bloques manuales."
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Cantidad de productos",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badges",
+      "label": "Mostrar badges",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Texto del badge",
+      "default": "NUEVO"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "manual_product",
+      "name": "Producto manual",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen del producto"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nombre",
+          "default": "Producto"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Descripción",
+          "default": "Descripción del producto"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Precio",
+          "default": "$54.990"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link del producto"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_badge",
+          "label": "Mostrar badge",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Texto del badge",
+          "default": "NUEVO"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RIZZOLI Grid Productos",
+      "blocks": [
+        { "type": "manual_product", "settings": { "name": "RZ-1" } },
+        { "type": "manual_product", "settings": { "name": "Urban 70" } },
+        { "type": "manual_product", "settings": { "name": "Titanium" } },
+        { "type": "manual_product", "settings": { "name": "RZ Mujer" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

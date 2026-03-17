@@ -1,0 +1,268 @@
+{{ 'rizzoli-base.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .rz-featured {
+    padding: 80px 40px;
+    background: var(--rz-white);
+  }
+
+  .rz-featured__layout {
+    max-width: var(--rz-max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .rz-featured--reverse .rz-featured__layout {
+    direction: rtl;
+  }
+
+  .rz-featured--reverse .rz-featured__layout > * {
+    direction: ltr;
+  }
+
+  .rz-featured__image {
+    display: flex;
+    overflow: hidden;
+  }
+
+  .rz-featured__image img {
+    width: 100%;
+    object-fit: contain;
+    transition: transform 0.6s ease;
+  }
+
+  .rz-featured__image:hover img {
+    transform: scale(1.03);
+  }
+
+  .rz-featured__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .rz-featured__badge {
+    display: inline-block;
+    font-family: var(--rz-font-heading);
+    font-size: var(--rz-text-overline);
+    font-weight: var(--rz-fw-bold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--rz-red);
+    color: var(--rz-white);
+    padding: 3px 10px;
+    margin-bottom: 16px;
+    align-self: flex-start;
+  }
+
+  .rz-featured__name {
+    font-family: var(--rz-font-heading);
+    font-size: var(--rz-text-h1);
+    font-weight: var(--rz-fw-black);
+    line-height: 1.05;
+    margin-bottom: 12px;
+  }
+
+  .rz-featured__desc {
+    font-family: var(--rz-font-body);
+    font-size: var(--rz-text-body-lg);
+    font-weight: var(--rz-fw-regular);
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  .rz-featured__price {
+    font-family: var(--rz-font-heading);
+    font-size: var(--rz-text-h4);
+    font-weight: var(--rz-fw-semibold);
+    margin-bottom: 24px;
+  }
+
+  .rz-featured__cta {
+    align-self: flex-start;
+  }
+
+  @media (max-width: 1024px) {
+    .rz-featured__layout {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .rz-featured--reverse .rz-featured__layout {
+      direction: ltr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .rz-featured {
+      padding: 60px 20px;
+    }
+
+    .rz-featured__name {
+      font-size: var(--rz-text-h2);
+    }
+  }
+</style>
+
+<section class="rz-featured {% if section.settings.reverse_layout %}rz-featured--reverse{% endif %}" data-section-id="{{ section.id }}">
+  <div class="rz-featured__layout rz-fade-in">
+    <div class="rz-featured__image">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 1200 }}"
+          alt="{{ section.settings.product_name | escape }}"
+          loading="lazy"
+          width="1200"
+          height="1200"
+        >
+      {%- elsif section.settings.product != blank -%}
+        <img
+          src="{{ section.settings.product.featured_image | image_url: width: 1200 }}"
+          alt="{{ section.settings.product.title | escape }}"
+          loading="lazy"
+          width="1200"
+          height="1200"
+        >
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+
+    <div class="rz-featured__content">
+      {%- if section.settings.badge_text != blank -%}
+        <span class="rz-featured__badge">{{ section.settings.badge_text }}</span>
+      {%- endif -%}
+
+      <h2 class="rz-featured__name">
+        {%- if section.settings.product_name != blank -%}
+          {{ section.settings.product_name }}
+        {%- elsif section.settings.product != blank -%}
+          {{ section.settings.product.title }}
+        {%- endif -%}
+      </h2>
+
+      {%- if section.settings.description != blank -%}
+        <p class="rz-featured__desc">{{ section.settings.description }}</p>
+      {%- elsif section.settings.product != blank -%}
+        <p class="rz-featured__desc">{{ section.settings.product.description | strip_html | truncate: 150 }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.show_price -%}
+        <p class="rz-featured__price">
+          {%- if section.settings.product != blank -%}
+            {{ section.settings.product.price | money }}
+          {%- elsif section.settings.price_text != blank -%}
+            {{ section.settings.price_text }}
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+
+      {%- if section.settings.button_text != blank -%}
+        <a
+          href="{% if section.settings.product != blank %}{{ section.settings.product.url }}{% else %}{{ section.settings.button_link }}{% endif %}"
+          class="rz-btn--cta rz-featured__cta"
+        >
+          {{ section.settings.button_text }}
+          <span class="rz-btn__arrow">→</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RIZZOLI Producto Destacado",
+  "tag": "section",
+  "class": "rz-featured-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Producto"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Producto de Shopify",
+      "info": "Opcional: selecciona un producto para jalar datos automáticamente"
+    },
+    {
+      "type": "header",
+      "content": "Contenido manual (sobrescribe al producto)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen del producto",
+      "info": "Si se selecciona, sobrescribe la imagen del producto de Shopify"
+    },
+    {
+      "type": "text",
+      "id": "product_name",
+      "label": "Nombre del producto",
+      "default": "Urban 70"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descripción",
+      "default": "Diseño clásico italochileno"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Texto del badge",
+      "default": "NUEVO",
+      "info": "Déjalo vacío para ocultar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Mostrar precio",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "price_text",
+      "label": "Precio manual",
+      "default": "$54.990",
+      "info": "Solo se usa si no hay producto seleccionado"
+    },
+    {
+      "type": "header",
+      "content": "Botón"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texto del botón",
+      "default": "COMPRAR"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link del botón",
+      "info": "Solo se usa si no hay producto seleccionado"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "reverse_layout",
+      "label": "Invertir layout (imagen a la derecha)",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "RIZZOLI Producto Destacado"
+    }
+  ]
+}
+{% endschema %}
